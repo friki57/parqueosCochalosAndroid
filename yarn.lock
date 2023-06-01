@@ -1442,6 +1442,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     "fastq" "^1.6.0"
 
+"@notifee/react-native@^7.7.1":
+  "integrity" "sha512-E+W91ulI4dxdIrhK6YCyjWqXgrUsVNZYYCSn3gDADmveuR2Yd2uGvbbSW2vUIFU4N4gQQT/5HJdk9Jk83KHbVA=="
+  "resolved" "https://registry.npmjs.org/@notifee/react-native/-/react-native-7.7.1.tgz"
+  "version" "7.7.1"
+
 "@react-native-async-storage/async-storage@^1.13.4", "@react-native-async-storage/async-storage@^1.18.1":
   "integrity" "sha512-70aFW8fVCKl+oA1AKPFDpE6s4t9pulj2QeLX+MabEmzfT3urd/3cckv45WJvtocdoIH/oXA3Y+YcCRJCcNa8mA=="
   "resolved" "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-1.18.1.tgz"
@@ -6404,6 +6409,11 @@
   "version" "1.7.1"
   dependencies:
     "@types/geojson" "^7946.0.10"
+
+"react-native-notifications@^4.3.5":
+  "integrity" "sha512-tCKkPaauN8/RIwPTeWdyezHXt5i4iDJViZGZ7/EBBuHB9kl9Oq3UjKFZeDfnM4DmJt+m7K2FQ7NaAuh3Kg1FCA=="
+  "resolved" "https://registry.npmjs.org/react-native-notifications/-/react-native-notifications-4.3.5.tgz"
+  "version" "4.3.5"
 
 "react-native-onboarding-swiper@^1.1.1":
   "integrity" "sha512-UcQ9FTSPG/t12B7dddr62xtA7qHb+MEc/kQnkkUbeWas0+0fQPjTjiFcVZm5LI3CP5X0HVp7U1Rzfrpf3O9lJA=="

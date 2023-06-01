@@ -38,35 +38,3 @@ class Camara extends Component {
     }
 };
 export default Camara;
-
-/* import React, { Component } from 'react';
-import { View, Text, Alert, ImageBackground } from 'react-native';
-
-import { RNCamera } from 'react-native-camera';
-
-export default class Camara extends Component {
-    constructor(props){
-        super(props);
-    }
-    barcodeRecognized = ({ barcodes }) => {
-        barcodes.forEach(barcode => console.warn(barcode.data))
-    };
-    render() {
-        return (
-            <View>
-                <RNCamera
-                    ref={ref => {
-                        this.camera = ref;
-                    }}
-                    style={{
-                        flex: 1,
-                        width: '100%',
-                    }}
-                onGoogleVisionBarcodesDetected={this.barcodeRecognized}
-                >
-                </RNCamera>
-            </View >
-        );
-    }
-}
- */

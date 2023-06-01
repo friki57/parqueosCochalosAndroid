@@ -17,7 +17,7 @@ export default class MiCuenta extends Component {
   }
   cerrarSesion(){
     global.usuario = undefined;
-    localStorage.eliminar("usuario", ()=>{
+    localStorage.eliminar("usuario", ()=>{ 
       this.props.navigation.navigate('InicioSesion');
     })
   }

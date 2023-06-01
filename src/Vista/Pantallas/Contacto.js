@@ -5,6 +5,11 @@ import Logo from '../Componentes/Formulario/Logo';
 
 import Images from "./../../Modelo/Img";
 
+import ButtonLogin from '../Componentes/Formulario/Button';
+
+import notificaciones from "./../../Controlador/Utils/notificaciones"
+
+var cont = 0;
 export default class Contacto extends Component {
   render()
   {
@@ -34,6 +39,18 @@ export default class Contacto extends Component {
             Tel: 43990231
             4884020
             </Text>
+        </View>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <ButtonLogin
+            onPress={() => {
+              console.log("Notificación"); 
+              notificaciones.nuevaTiempo(1000*5, {id: "x", title:"Parqueos cochalos", body: "notificación de prueba(tiempo): "+ cont}); 
+              cont+=1;
+              notificaciones.nuevaFecha(new Date((new Date()).getTime()+10*1000), {id: "x2", title:"Parqueos cochalos", body: "notificación de prueba (fecha): "+ cont}); 
+              cont+=1;
+            }}
+            titleButton={"Notificación"}>
+          </ButtonLogin>
         </View>
       </View>
     );

@@ -7,6 +7,8 @@ import SocketIOClient from 'socket.io-client/dist/socket.io.js'
 import Images from "./../../Modelo/Img";
 import Fetch from "../../Controlador/Utils/Fetch";
 
+import notificaciones from "../../Controlador/Utils/notificaciones"
+
 const dominio = "http://83.229.86.168:5000"
 
 export default class Actual extends Component {
@@ -15,9 +17,11 @@ export default class Actual extends Component {
     this.state = {
       calle:"",
       fecha:"",
-      fechaFinal:""
+      fechaFinal:"",
+      tiempoRestante: -1
     }
     this.adicionarTiempo = this.adicionarTiempo.bind(this);
+    this.notificar = this.notificar.bind(this);
     setTimeout(()=>
     {
       this.socket = SocketIOClient(dominio, { transports: ['websocket'], jsonp: false });
@@ -27,21 +31,42 @@ export default class Actual extends Component {
         console.log(",,,,,,,,,,,,,,,,,,,,,,, calles")
         Fetch("/ParqueoActual/"+global.usuario.key, (res)=>{
           console.log("---------------------------------------",res)
-          if(res!=0)
-          this.setState(res)
+          if(res!=0) {
+            this.setState(res, ()=>{
+              this.notificar();
+            }) 
+          }
           else
             this.setState({
               calle: "",
               fecha: "",
-              fechaFinal: ""
+              fechaFinal: "",
+              tiempoRestante: -1
             })
-        })
+          })
       });
     },1000)
     Fetch("/ParqueoActual/"+global.usuario.key, (res)=>{
-      console.log("---------------------------------------",res)
+      console.log("..........................",res)
       if(res!=0)
-      this.setState(res)
+      this.setState(res,()=>{
+        this.notificar();
+      })
+
+    })
+  }
+  notificar() {
+    console.log("parqueo actual------------------------")  
+    const minutosRestantes = Math.round(((this.state.tiempoRestante % 86400000) % 3600000) / 60000);
+    console.log(minutosRestantes);  
+    marcas = [15, 10, 5, 1];
+    marcas.forEach((m)=>{
+      notificaciones.nuevaTiempo((minutosRestantes-m) * 1000 * 60, { id: m.toString(), title: "Quedan " + m + " minutos de estacionamiento", body: "Recuerda ya solo te quedan " + m + " minutos de tiempo de estacionamiento, ingresa a la aplicación para extender tu tiempo"});
+      if(minutosRestantes>m){
+      } else {
+        
+      }
+      
     })
   }
   adicionarTiempo(t)
