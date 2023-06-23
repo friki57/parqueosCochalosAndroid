@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 import Colors from '../../../Modelo/Colors';
 
-export default class Button extends Component {
+export default class Boton extends Component {
     constructor(props) {
         super(props);
     }
@@ -11,10 +11,10 @@ export default class Button extends Component {
         return (
             <View>
                 <TouchableOpacity
-                    style={stylesButton.container}
+                    style={this.props.style?this.props.style:stylesButton.container}
                     onPress={this.props.onPress}>
                     <Text
-                        style={stylesButton.text}>{this.props.titleButton}
+                        style={stylesButton.text}>{this.props.title}
                     </Text>
                 </TouchableOpacity>
             </View>

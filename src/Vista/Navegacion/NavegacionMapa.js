@@ -74,7 +74,7 @@ export default class NavegacionAbajo extends Component {
         <Tab.Navigator
           tabBar={props => <MyTabBar {...props} />}>
           <Tab.Screen name="Mapa" component={Inicio} />
-          <Tab.Screen name="Actual" component={Actual} />
+          <Tab.Screen name="Usar Parqueo" component={Actual} />
         </Tab.Navigator>
 
     );

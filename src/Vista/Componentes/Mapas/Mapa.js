@@ -11,8 +11,9 @@ const colores = {
   rojo: "#f46",
   verde: "#6f4",
   azul: "#36f",
-  amarillo: "#000",
-  tan: "#D2B48C"
+  amarillo: "yellow",
+  tan: "#D2B48C",
+  yo: "indigo"
 }
 /* Mapbox.setWellKnownTileServer('Mapbox');
 Mapbox.setAccessToken("pk.eyJ1IjoiZnJpa2k1NyIsImEiOiJjanZxOGtxMjgwaDhxNDRvOHl5NDVvZnQyIn0._cULjNb2IP5SLSBSm7Higw");
@@ -26,11 +27,13 @@ class Mapa extends Component {
       ubicacionActual: [-66.1556638449178, -17.389506188021315],
       MarcadorUbicacion: undefined,
       Calles: undefined,
-      color: "tan",
+      color: "aqua",
       select: undefined,
-      listaCalles: []
+      listaCalles: [],
+      ultimaConsulta: []
     }
     this.actualizar = this.actualizar.bind(this);
+    this.fetchMapas = this.fetchMapas.bind(this);
     this.textoSeleccionado = this.textoSeleccionado.bind(this);
     setTimeout(() => {
       this.socket = SocketIOClient(dominio, { transports: ['websocket'], jsonp: false });
@@ -52,23 +55,28 @@ class Mapa extends Component {
           this.setState({ ubicacion: this.state.ubicacionActual })
         }
         this.setState(
-          { MarcadorUbicacion: (<Marker coordinate={{ latitude: this.state.ubicacionActual[1], longitude: this.state.ubicacionActual[0] }} pinColor={this.state.color} key={this.state.color} color={colores.amarillo} id="aca" ubicacion={this.state.ubicacion} texto="Usted está acá"
+          { MarcadorUbicacion: (<Marker coordinate={{ latitude: this.state.ubicacionActual[1], longitude: this.state.ubicacionActual[0] }} pinColor={this.state.color} key={this.state.color} color={colores.yo} id="aca" ubicacion={this.state.ubicacion} texto="Usted está acá"
           title="Usted está aquí"
             onPress={() => { this.setState({ select: "tu" }, () => console.log("aaaaaaaaaaaaaaaaaaaaaaaaa", this.state.select)) }}
           ></Marker>) }
         );
-        fetch(dominio + "/MapasMovil")
-          .then(res => res.json())
-          .then(data => {
-            console.log(data);
-            this.actualizar(data);
-          });
+        this.fetchMapas();
       },
-      error => Alert.alert("Imposible obtener la localización.\nFavor de conectarse a internets."),
+      error => Alert.alert("Imposible obtener la localización.\nFavor de conectarse a internet."),
       { enableHighAccuracy: true, timeout: 20000 }
     );
   }
-  actualizar(data) {
+  fetchMapas(){
+    fetch(dominio + "/MapasMovil")
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        this.actualizar(data);
+      });
+  }
+  actualizar(data = "no") {
+    if(data == "no") data = this.state.ultimaConsulta
+    else this.setState({ultimaConsulta: data});
     this.setState({ Calles: undefined })
     data = data.filter(a => a != undefined)
     data = data.filter(a => a.geojson != undefined)
@@ -105,11 +113,16 @@ class Mapa extends Component {
       }
       else {
         if (a.espacios == a.espaciosMaximo)
-          colorp = colores.azul;
+          colorp = colores.tan;
         else {
           colorp = colores.verde;
         }
-        }
+      }
+/*       console.log("this.state.select && a ++++++++++++++++++++")
+      console.log(this.state.select, a.key) */
+      if (this.state.select != undefined && a!=undefined) if(a.key == this.state.select.key) {
+        colorp = colores.azul;  
+      }
       a.colorp = colorp;
       a.calleCom = (a.calle + " entre " + a.c1 + " y " + a.c2)
       return a;
@@ -119,8 +132,8 @@ class Mapa extends Component {
         a = colorear(a);
 
         return (
-          <Marker coordinate={{ latitude: a.lat, longitude: a.lon }} pinColor={a.colorp} key={i.toString() + " " + a.colorp}
-            onPress={() => { this.setState({ select: a }, () => console.log("click", this.state.select)) }}
+          <Marker coordinate={{ latitude: a.lat, longitude: a.lon }} pinColor={a.colorp} key={i.toString() + " " + a.colorp} /* title={"Calle seleccionada: " + a.calleCom} */
+            onPress={() => { this.setState({ select: a }, () => {console.log("click", this.state.select); this.actualizar()}) }}
           ></Marker>
           /*             <Text id={i.toString()} color={colorp} ubicacion = {[a.lon, a.lat]} texto={(a.calle+" entre "+a.c1+" y "+a.c2)} key = {i.toString()}></Text> */
         )

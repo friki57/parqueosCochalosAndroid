@@ -35,10 +35,10 @@ export default class MiCuenta extends Component {
                 Matrícula: {global.usuario.placa}</Text>
                 <Text style = {{width: 250, fontSize: 20, margin: 10}}>
                 Saldo actual: {global.usuario.saldo}</Text>
-              <ButtonLogin
-                onPress={() => { console.log("Cerrando sesión"); this.cerrarSesion(); }}
-                titleButton={"Cerrar Sesión"}>
-              </ButtonLogin>
+                <ButtonLogin
+                  onPress={() => { console.log("Cerrando sesión"); this.cerrarSesion(); }}
+                  titleButton={"Cerrar Sesión"}>
+                </ButtonLogin>
               </View>
             </View>
           </ImageBackground>
@@ -67,19 +67,21 @@ const stylesLoginScreen = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.azul,
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
     },
     logo: {
         flex: 1,
-        width: '100%',
+        width: '70%',
         resizeMode: 'contain',
         alignSelf: 'center',
+        marginTop: -200
     },
     form: {
-        flex: 1,
+        flex: 0.5,
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-evenly',
         width: '80%',
-        backgroundColor:"#aaaa"
+        backgroundColor:Colors.azulApp,
+        marginTop: -200
     },
 });

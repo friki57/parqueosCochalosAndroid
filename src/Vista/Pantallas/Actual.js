@@ -7,6 +7,8 @@ import SocketIOClient from 'socket.io-client/dist/socket.io.js'
 import Images from "./../../Modelo/Img";
 import Fetch from "../../Controlador/Utils/Fetch";
 
+import Colors from '../../Modelo/Colors';
+
 import notificaciones from "../../Controlador/Utils/notificaciones"
 
 const dominio = "http://83.229.86.168:5000"
@@ -90,13 +92,13 @@ export default class Actual extends Component {
       {
         this.state.calle.length>0?
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ padding: 10, backgroundColor: "#ccc", margin: 30, borderRadius: 10, fontSize: 20 }}>
+              <Text style={{ padding: 10, backgroundColor: Colors.azulApp, margin: 30, borderRadius: 10, fontSize: 20 }}>
                 Actulamente estacionado en: {"\n"}
                 {this.state.calle.trim()} {"\n"}
                 Desde las {this.state.fecha} {"\n"}
                 Con tiempo limite hasta las {this.state.fechaFinal}
               </Text>
-              <Text style={{ padding: 10, backgroundColor: "#fcc", margin: 30, borderRadius: 10, fontSize: 20 }}>
+              <Text style={{ padding: 10, backgroundColor: Colors.azulApp, margin: 30, borderRadius: 10, fontSize: 20 }}>
                 Modificar Tiempos
               </Text>
               <ButtonLogin

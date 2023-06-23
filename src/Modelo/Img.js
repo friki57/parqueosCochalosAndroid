@@ -12,5 +12,13 @@ export default {
   IconoTelefono: require("./../../Assets/Img/IconoTelefono.jpg"),
   textura1: require("./../../Assets/Img/textura1.jpg"),
   textura2: require("./../../Assets/Img/textura2.jpg"),
-  marca: require("./../../Assets/Img/marca.png")
+  textura3: require("./../../Assets/Img/textura3.jpg"),
+  textura4: require("./../../Assets/Img/textura4.jpeg"),
+  textura5: require("./../../Assets/Img/textura5.jpg"),
+  marca: require("./../../Assets/Img/marca.png"),
+  marcaCuadrado: require("./../../Assets/Img/marcaCuadrado.png"),
+  telBlanco: require("./../../Assets/Img/whitephone.png"),
+  qr10: require("./../../Assets/Img/qr10.jpg"),
+  qr20: require("./../../Assets/Img/qr20.jpg"),
+  qr50: require("./../../Assets/Img/qr50.jpg"),
 };
